@@ -8,31 +8,96 @@ import java.util.InputMismatchException;
 
 public class Controller {
 
+    private Scanner scanner = new Scanner(System.in);
+    private TaskService taskService = new TaskService();
+    private UserService userService = new UserService(taskService);
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        TaskService taskService = new TaskService();
-        UserService userService = new UserService(taskService);
-
-        boolean loggedIn = false;
+        new Controller().start();
+    }
 
 
-        while (true) {
+        // Method to start the application
+        public void start() {
+            while (true) {
+                // Display main menu
+                System.out.println("Welcome to Todo Manager!");
+                System.out.println("0. Exit");
+                System.out.println("1. Register");
+                System.out.println("2. Login");
 
-            if (!loggedIn) {
-                System.out.println("\nLogin:");
-                System.out.print("Username: ");
-                String username = scanner.nextLine();
-                System.out.print("Password: ");
-                String password = scanner.nextLine();
-
-                loggedIn = userService.loginUser(username, password);
-
-                if (!loggedIn) {
-                    System.out.println("Invalid username or password. Please try again.");
+                // Read user choice
+                int choice = 0;
+                try {
+                    choice = scanner.nextInt();
+                    scanner.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    scanner.nextLine();
                     continue;
                 }
-            }
 
+                // Process user choice
+                switch (choice) {
+                    case 1:
+                        register();
+                        break;
+                    case 2:
+                        login();
+                        break;
+                    case 0:
+                        System.out.println("Exited!");
+                        return;
+                    default:
+                        System.out.println("Invalid choice. Please try again.");
+                }
+            }
+        }
+
+        // Method for user registration
+        private void register() {
+            System.out.println("Registration");
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+            
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
+
+            try {
+                // Call UserService to register user
+                userService.registerUser(username, password);
+                System.out.println("Registration successful!");
+            } catch (Exception e) {
+                System.out.println("Error during registration: " + e.getMessage());
+            }
+        }
+
+        // Method for user login
+        private void login() {
+            System.out.print("Enter username: ");
+            String username = scanner.nextLine();
+            System.out.print("Enter password: ");
+            String password = scanner.nextLine();
+
+            try {
+                // Call UserService to login user
+                if (userService.loginUser(username, password)) {
+                    User user = userService.getUserDetails(username);
+                    userMenu(user);
+                } else {
+                    System.out.println("Invalid username or password.");
+                }
+            } catch (Exception e) {
+                System.out.println("Error during login: " + e.getMessage());
+            }
+        }
+
+
+        // Method for user-specific menu
+        private void userMenu(User user) {
+            while (true) {
+                // Display user menu
+                        System.out.println("Welcome " + user.getUserName() + "!");
             System.out.println("\nTodo Manager Menu:");
             System.out.println("0. Exit");
             System.out.println("1. Show Tasks");
@@ -50,7 +115,8 @@ public class Controller {
             System.out.println("13. Show Incomplete Tasks");
             System.out.print("Choose an option: ");
 
-            int choice = scanner.nextInt();
+            int choice = 0;
+
             try {
                 choice = scanner.nextInt();
                 scanner.nextLine();
@@ -61,13 +127,11 @@ public class Controller {
             }
 
 
-
+            try{
             switch (choice) {
                 case 0:
                     System.out.println("Exiting Todo Manager.");
-                    scanner.close();
-                    System.exit(0);
-                    break;
+                    return;
                 case 1:
                     userService.showTasks();
                     break;
@@ -103,6 +167,9 @@ public class Controller {
                     userService.showIncompleteTasks();
                 default:
                     System.out.println("Invalid choice. Please try again.");
+            }
+            } catch (Exception e) {
+                System.out.println("Error: " + e.getMessage());
 
             }
         }

@@ -1,17 +1,20 @@
 package com.infosys.service;
 
 import com.infosys.dao.UserDAO;
+import com.infosys.exception.*;
 import com.infosys.pojo.Task;
 import com.infosys.pojo.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class UserService {
     private List<User> users;
     private TaskService taskService;
     private UserDAO userDAO;
     private User loggedInUser;
+    private Scanner scanner = new Scanner(System.in);
 
     public UserService(TaskService taskService) {
         this.users = new ArrayList<>();
@@ -44,6 +47,17 @@ public class UserService {
         return false;
     }
 
+
+    // Get user details by username
+    public User getUserDetails(String username) throws UserNotFoundException {
+        return userDAO.getUserByUsername(username);
+    }
+
+    // Get user by user ID
+    public User getUserById(int userId) throws UserNotFoundException {
+        return userDAO.getUserById(userId);
+    }
+
     public void logoutUser() {
         loggedInUser = null;
     }
@@ -60,9 +74,13 @@ public class UserService {
         }
     }
 
-    public void addTask() {
+    public void addTask()  {
         if (isLoggedInWithRole("Client")) {
-            taskService.addTask();
+            try {
+                taskService.addTask();
+            } catch (DuplicateTaskException e) {
+                throw new RuntimeException(e);
+            }
         } else {
             System.out.println("Only clients can add tasks.");
         }
@@ -102,7 +120,8 @@ public class UserService {
 
     public void assignTaskToUser(){
         if (isLoggedInWithRole("Client")) {
-            String visitorName = taskService.assignTaskToUser();
+            System.out.println("Enter user name to be assigned to: ");
+            String visitorName = scanner.nextLine();
             try {
                 User visitorUser = userDAO.getUserByUsername(visitorName);
                 taskService.assignTaskToUser(visitorUser);
@@ -115,8 +134,6 @@ public class UserService {
                 } catch (DuplicateUserException ex) {
                     System.out.println(ex.getMessage());
                 }
-            } catch (TaskNotFoundException | InvalidTaskOperationException e) {
-                System.out.println(e.getMessage());
             }
 
         } else {
@@ -126,12 +143,7 @@ public class UserService {
 
     public ArrayList<Task> getTasksForVisitor() {
         if (isLoggedInWithRole("Visitor")) {
-            try {
-                return taskService.getTasksByUserName(loggedInUser.getUsername());
-            } catch (UserNotFoundException e) {
-                System.out.println(e.getMessage());
-                return null;
-            }
+            return taskService.getTasksByUserName(loggedInUser.getUsername());
         } else {
             System.out.println("Only visitors can view their tasks.");
             return null;
@@ -141,7 +153,7 @@ public class UserService {
     public void showTasksForVisitor(){
         taskService.showTasks(getTasksForVisitor());
     }
-    
+
 
     public void markTaskAsCompleted(){
         if(isLoggedInWithRole("Visitor")){
@@ -175,3 +187,4 @@ public class UserService {
 
 
 }
+

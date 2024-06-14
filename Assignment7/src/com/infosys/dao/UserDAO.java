@@ -1,6 +1,8 @@
 package com.infosys.dao;
 
 import java.util.ArrayList;
+
+import com.infosys.exception.*;
 import com.infosys.pojo.User;
 
 public class UserDAO {
@@ -12,7 +14,7 @@ public class UserDAO {
         this.nextUserId = 1;
     }
 
-    public ArrayList<User> getAllUsers() throws UserNotFoundException{
+    public ArrayList<User> getAllUsers() throws UserNotFoundException {
         if (users.isEmpty()) {
             throw new UserNotFoundException("No users found.");
         } else {
@@ -33,7 +35,7 @@ public class UserDAO {
     }
 
     // retrieve a user by ID
-    public User getUserById(int id) hrows UserNotFoundException{
+    public User getUserById(int id) throws UserNotFoundException{
         for (User user : users) {
             if (user.getUserId() == id) {
                 return user;

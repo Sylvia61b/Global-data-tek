@@ -3,11 +3,9 @@ package com.infosys.service;
 import com.infosys.dao.TaskDAO;
 import com.infosys.pojo.Task;
 import com.infosys.pojo.User;
+import com.infosys.exception.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.InputMismatchException;
-import java.util.Scanner;
+import java.util.*;
 
 public class TaskService {
 
@@ -15,7 +13,7 @@ public class TaskService {
     private TaskDAO taskDAO = new TaskDAO();
 
     public void showTasks() {
-        ArrayList<Task> taskArray = taskDAO.getTaskArray();
+        List<Task> taskArray = taskDAO.getTaskArray();
         if (taskArray != null) {
             for (Task task : taskArray) {
                 System.out.println(task);
@@ -32,11 +30,11 @@ public class TaskService {
     }
 
 
-    public ArrayList<Task> getTaskArray(){
+    public List<Task> getTaskArray(){
         return taskDAO.getTaskArray();
     }
 
-    public void addTask() {
+    public void addTask() throws DuplicateTaskException {
         System.out.println("Please enter the number of tasks you would like to add: ");
         int count = 0;
         try {
@@ -88,11 +86,12 @@ public class TaskService {
                 System.out.println("Task removed: " + removedTask.getTaskTitle());
             } else {
                 System.out.println("Invalid task id.");
-            } catch(TaskNotFoundException e){
-                System.out.println(e.getMessage());
             }
+        } catch(TaskNotFoundException e){
+                System.out.println(e.getMessage());
         }
     }
+
 
     public void searchTask() {
         System.out.print("Enter task to search: ");
@@ -124,19 +123,19 @@ public class TaskService {
         }
     }
 
-    public String assignTaskToUser() {
-        System.out.print("Enter the task id: ");
-        int id = scanner.nextInt();
-        System.out.println("Enter user name to be assigned to: ");
-        String userName = scanner.nextLine();
-        try {
-            taskDAO.assignTaskToUser(id, userName);
-            return userName;
-        } catch (TaskNotFoundException | UserNotFoundException | InvalidTaskOperationException e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
+//    public String assignTaskToUser() {
+//        System.out.print("Enter the task id: ");
+//        int id = scanner.nextInt();
+//        System.out.println("Enter user name to be assigned to: ");
+//        String userName = scanner.nextLine();
+//        try {
+//            taskDAO.assignTaskToUser(id, userName);
+//            return userName;
+//        } catch (TaskNotFoundException | UserNotFoundException | InvalidTaskOperationException e) {
+//            System.out.println(e.getMessage());
+//            return null;
+//        }
+//    }
 
     public void assignTaskToUser(User user){
         System.out.print("Enter the task id: ");
@@ -144,7 +143,7 @@ public class TaskService {
         scanner.nextLine();
         try {
             taskDAO.assignTaskToUser(id, user.getUsername());
-        } catch (TaskNotFoundException | UserNotFoundException | InvalidTaskOperationException e) {
+        } catch (TaskNotFoundException | InvalidTaskOperationException e) {
             System.out.println(e.getMessage());
         }
     }
@@ -154,65 +153,55 @@ public class TaskService {
         System.out.println("Please enter the task id you want to mark as completed: ");
         int taskId = scanner.nextInt();
         scanner.nextLine();
-        try {
-            ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
-            for (Task task : tasks) {
-                if (task.getTaskId() == taskId) {
-                    task.setCompleted(true);
-                    System.out.println("Task: " + task.getTaskTitle() + " was marked completed.");
-                    return;
-                }
+        ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
+        for (Task task : tasks) {
+            if (task.getTaskId() == taskId) {
+                task.setCompleted(true);
+                System.out.println("Task: " + task.getTaskTitle() + " was marked completed.");
+                return;
             }
-        } catch (TaskNotFoundException | UserNotFoundException e) {
-            System.out.println(e.getMessage());
         }
     }
 
     public void showCompletedTasks(User user){
-        try {
-            ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
-            for (Task task : tasks) {
-                if (task.isCompleted()) {
-                    System.out.println("Completed: " + task.toString());
-                }
+        ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
+        for (Task task : tasks) {
+            if (task.isCompleted()) {
+                System.out.println("Completed: " + task.toString());
             }
-        } catch (TaskNotFoundException | UserNotFoundException e) {
-            System.out.println(e.getMessage());
         }
     }
 
     public void showIncompleteTasks(User user) {
-        try {
-            ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
-            for (Task task : tasks) {
-                if (!task.isCompleted()) {
-                    System.out.println("Incomplete: " + task.toString());
-                }
+        ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
+        for (Task task : tasks) {
+            if (!task.isCompleted()) {
+                System.out.println("Incomplete: " + task.toString());
             }
-        } catch (TaskNotFoundException | UserNotFoundException e) {
-            System.out.println(e.getMessage());
         }
     }
 
     public void showTasksInIncreasingOrder(User user){
-        try {
-            ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
-            tasks.sort((task1, task2) -> Integer.compare(task1.getTaskId(), task2.getTaskId()));
-            tasks.forEach(task -> System.out.println("Task ID: " + task.getTaskId() + ", Title: " + task.getTaskTitle()));
-        } catch (TaskNotFoundException | UserNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+        ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
+        tasks.sort((task1, task2) -> Integer.compare(task1.getTaskId(), task2.getTaskId()));
+        tasks.forEach(task -> System.out.println("Task ID: " + task.getTaskId() + ", Title: " + task.getTaskTitle()));
     }
 
 
     public void showTasksInDecreasingOrder(User user){
-        try {
-            ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
-            tasks.sort((task1, task2) -> Integer.compare(task2.getTaskId(), task1.getTaskId()));
-            tasks.forEach(task -> System.out.println("Task ID: " + task.getTaskId() + ", Title: " + task.getTaskTitle()));
-        } catch (TaskNotFoundException | UserNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
+        ArrayList<Task> tasks = taskDAO.getTasksByUserName(user.getUsername());
+        tasks.sort((task1, task2) -> Integer.compare(task2.getTaskId(), task1.getTaskId()));
+        tasks.forEach(task -> System.out.println("Task ID: " + task.getTaskId() + ", Title: " + task.getTaskTitle()));
     }
-    
+
+    public ArrayList<Task> getTasksByUserName(String username) {
+        ArrayList<Task> userTasks = new ArrayList<>();
+        for (Task task : taskDAO.getTaskArray()) {
+            if (task.getAssignedTo().equals(username)) {
+                userTasks.add(task);
+            }
+        }
+        return userTasks;
+    }
+
 }

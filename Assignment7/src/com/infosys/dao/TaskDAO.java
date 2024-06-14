@@ -1,15 +1,17 @@
 package com.infosys.dao;
 
+import com.infosys.exception.*;
 import com.infosys.pojo.Task;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TaskDAO {
     private List<Task> taskArray = new ArrayList<>();
 
 
     // Method to display all tasks
-    public ArrayList<Task> getTaskArray() {
+    public List<Task> getTaskArray() {
         if (taskArray.isEmpty()) {
             return null;
         } else {
@@ -25,7 +27,7 @@ public class TaskDAO {
         return true;
     }
 
-    public boolean deleteTaskByName(String taskName) throws TaskNotFoundException{
+    public boolean deleteTaskByName(String taskName) throws TaskNotFoundException {
         Task task = searchTask(taskName);
         if (task != null) {
             taskArray.remove(task);
@@ -80,12 +82,13 @@ public class TaskDAO {
         if (task == null) {
             throw new TaskNotFoundException("Task with ID " + id + " not found.");
         }
-
         if (task.getAssignedTo() != null) {
             throw new InvalidTaskOperationException("Task with ID " + id + " is already assigned to a user.");
         }
         task.setAssignedTo(userName);
     }
+
+
 
     public ArrayList<Task> getTasksByUserName(String userName) {
         ArrayList<Task> userTasks = new ArrayList<>();
@@ -98,3 +101,4 @@ public class TaskDAO {
         return userTasks;
     }
 }
+
