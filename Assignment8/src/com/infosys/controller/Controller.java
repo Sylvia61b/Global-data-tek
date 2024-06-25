@@ -98,8 +98,5 @@ public class Controller {
         Thread userThread = new Thread(userInteractionHandler);
         userThread.start();
     }
-
-
-
-    }
+    
 }
