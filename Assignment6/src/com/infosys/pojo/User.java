@@ -1,25 +1,25 @@
 package com.infosys.pojo;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
     private String userName;
     private Long userId;
     private String emailId;
     private String password;
-    private Book[] newBooks;
-    private Book[] favourite;
-    private Book[] completed;
+    private List<Book> newBooks;
+    private List<Book> favourite;
+    private List<Book> completed;
 
     public User(String userName, Long userId, String emailId, String password) {
         this.userName = userName;
         this.userId = userId;
         this.emailId = emailId;
         this.password = password;
-        this.newBooks = new Book[10];
-        this.favourite = new Book[10];
-        this.completed = new Book[10];
-
+        this.newBooks = new ArrayList<>();
+        this.favourite = new ArrayList<>();
+        this.completed = new ArrayList<>();
     }
 
     public String getUserName() {
@@ -46,11 +46,11 @@ public class User {
         this.emailId = emailId;
     }
 
-    public Book[] getNewBooks() {
+    public List<Book> getNewBooks() {
         return newBooks;
     }
 
-    public void setNewBooks(Book[] newBooks) {
+    public void setNewBooks(List<Book> newBooks) {
         this.newBooks = newBooks;
     }
 
@@ -62,19 +62,19 @@ public class User {
         this.password = password;
     }
 
-    public Book[] getFavourite() {
+    public List<Book> getFavourite() {
         return favourite;
     }
 
-    public void setFavourite(Book[] favourite) {
+    public void setFavourite(List<Book> favourite) {
         this.favourite = favourite;
     }
 
-    public Book[] getCompleted() {
+    public List<Book> getCompleted() {
         return completed;
     }
 
-    public void setCompleted(Book[] completed) {
+    public void setCompleted(List<Book> completed) {
         this.completed = completed;
     }
 
@@ -84,9 +84,9 @@ public class User {
                 "userName='" + userName + '\'' +
                 ", userId=" + userId +
                 ", emailId='" + emailId + '\'' +
-                ", newBooks=" + Arrays.toString(newBooks) +
-                ", favourite=" + Arrays.toString(favourite) +
-                ", completed=" + Arrays.toString(completed) +
+                ", newBooks=" + newBooks +
+                ", favourite=" + favourite +
+                ", completed=" + completed +
                 '}';
     }
 }

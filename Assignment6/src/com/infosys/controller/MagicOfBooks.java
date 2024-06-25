@@ -7,9 +7,10 @@ import com.infosys.service.UserService;
 import java.util.Scanner;
 
 public class MagicOfBooks {
-    private UserService userService;
-    private BookService bookService;
-    private Scanner scanner;
+
+    private final UserService userService;
+    private final BookService bookService;
+    private final Scanner scanner;
 
     // Constructor
     public MagicOfBooks(UserService userService, BookService bookService) {
@@ -59,8 +60,12 @@ public class MagicOfBooks {
         String password = scanner.nextLine();
 
         // Call UserService to register user
-        userService.registerUser(username, userId, emailId, password);
-        System.out.println("Registration successful!");
+        try {
+            userService.registerUser(username, userId, emailId, password);
+            System.out.println("Registration successful!");
+        } catch (Exception e) {
+            System.out.println("Registration failed: " + e.getMessage());
+        }
     }
 
     // Method for user login
@@ -71,11 +76,23 @@ public class MagicOfBooks {
         String password = scanner.nextLine();
 
         // Call UserService to login user
-        if (userService.loginUser(username, password)) {
-            User user = userService.getUserDetails(username);
-            userMenu(user);
-        } else {
-            System.out.println("Invalid username or password.");
+        try {
+            if (userService.loginUser(username, password)) {
+                System.out.println("Login successful!");
+
+                // Create a new thread for user interaction
+                Thread userThread = new Thread(() -> {
+                    User user = userService.getUserDetails(username);
+                    userMenu(user);
+                });
+
+                // Start the user thread
+                userThread.start();
+            } else {
+                System.out.println("Invalid username or password.");
+            }
+        } catch (Exception e) {
+            System.out.println("Login failed: " + e.getMessage());
         }
     }
 
@@ -119,4 +136,3 @@ public class MagicOfBooks {
         magicOfBooks.start();
     }
 }
-

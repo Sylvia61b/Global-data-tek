@@ -4,7 +4,7 @@ import com.infosys.dao.UserDAO;
 import com.infosys.pojo.Book;
 import com.infosys.pojo.User;
 
-import java.util.Arrays;
+import java.util.List;
 
 public class UserService {
     private UserDAO userDAO;
@@ -15,13 +15,13 @@ public class UserService {
     }
 
     // Register a new user
-    public void registerUser(String username, Long userId, String emailId, String password) {
+    public synchronized void registerUser(String username, Long userId, String emailId, String password) {
         User newUser = new User(username, userId, emailId, password);
         userDAO.addUser(newUser);
     }
 
     // Login a user
-    public boolean loginUser(String username, String password) {
+    public synchronized boolean loginUser(String username, String password) {
         return userDAO.verifyUser(username, password);
     }
 
@@ -36,13 +36,14 @@ public class UserService {
     }
 
     // Update user information
-    public void updateUser(User user) {
+    public synchronized void updateUser(User user) {
         String newUserName = user.getUserName();
         String newEmailId = user.getEmailId();
 
         // Check if the new username is already taken
         if (userDAO.isUserNameTaken(newUserName)) {
             System.out.println("Username already exists. Please choose a different username.");
+            return;
         }
 
         // Update user information
@@ -56,12 +57,12 @@ public class UserService {
     }
 
     // Delete a user by username
-    public void deleteUser(String username) {
+    public synchronized void deleteUser(String username) {
         userDAO.deleteUser(username);
     }
 
     // View all books of a user
-    public void viewAllBooks(User user, BookService bookService) {
+    public synchronized void viewAllBooks(User user, BookService bookService) {
         System.out.println("New Books: ");
         bookService.printBooks(user.getNewBooks());
 
@@ -73,41 +74,26 @@ public class UserService {
     }
 
     // Mark a book as completed for a user
-    public boolean markBookAsCompleted(User user, Long bookId) {
-        for (int i = 0; i < user.getNewBooks().length; i++) {
-            Book book = user.getNewBooks()[i];
+    public synchronized boolean markBookAsCompleted(User user, Long bookId) {
+        List<Book> newBooks = user.getNewBooks();
+        List<Book> completedBooks = user.getCompleted();
+
+        for (int i = 0; i < newBooks.size(); i++) {
+            Book book = newBooks.get(i);
             if (book != null && book.getBookId().equals(bookId)) {
                 // Remove from newBooks
-                user.getNewBooks()[i] = null;
+                newBooks.remove(i);
 
-                Book[] completedBooks = user.getCompleted();
-                for (int j = 0; j < completedBooks.length; j++) {
-                    if (completedBooks[j] == null) {
-                        // Add to completed
-                        completedBooks[j] = book;
-                        return true;
-                    }
-                }
-
-                // If completed array is full, resize it
-                completedBooks = Arrays.copyOf(completedBooks, completedBooks.length * 2);
-                completedBooks[user.getCompleted().length] = book;
-                user.setCompleted(completedBooks);
+                // Add to completedBooks
+                completedBooks.add(book);
                 return true;
             }
         }
         return false;
     }
 
-    // Helper method to check if the user's new books array is full
+    // Helper method to check if the user's new books list is full
     private boolean isUserNewBooksFull(User user) {
-        for (Book book : user.getNewBooks()) {
-            if (book == null) {
-                // There is space in the newBooks array
-                return false;
-            }
-        }
-        // No space in the newBooks array
-        return true;
+        return user.getNewBooks().size() >= 10;
     }
 }

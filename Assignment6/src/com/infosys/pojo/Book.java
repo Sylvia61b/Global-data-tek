@@ -13,36 +13,44 @@ public class Book {
         this.bookId = bookId;
     }
 
-    // Getters and setters
-    public String getBookName() {
-        return bookName;
+    // Synchronized method to update book details
+    public synchronized void updateBookDetails(String bookName, String authorName, String description) {
+        this.bookName = bookName;
+        this.authorName = authorName;
+        this.description = description;
     }
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
+    // Getters for immutable fields
+    public String getBookName() {
+        return bookName;
     }
 
     public String getAuthorName() {
         return authorName;
     }
 
-    public void setAuthorName(String authorName) {
-        this.authorName = authorName;
-    }
-
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
-    public Long getBookId() {
+    public synchronized Long getBookId() {
         return bookId;
     }
 
-    public void setBookId(Long bookId) {
+    public synchronized void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public synchronized void setAuthorName(String authorName) {
+        this.authorName = authorName;
+    }
+
+    public synchronized void setDescription(String description) {
+        this.description = description;
+    }
+
+    public synchronized void setBookId(Long bookId) {
         this.bookId = bookId;
     }
 
@@ -55,4 +63,6 @@ public class Book {
                 ", bookId=" + bookId +
                 '}';
     }
+
+
 }
