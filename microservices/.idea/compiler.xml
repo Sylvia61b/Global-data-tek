@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="Course-Rating" />
+        <module name="EnrolledCourse" />
         <module name="CourseCatalog" />
       </profile>
     </annotationProcessing>
@@ -19,6 +20,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Course-Rating" options="-parameters" />
       <module name="CourseCatalog" options="-parameters" />
+      <module name="EnrolledCourse" options="-parameters" />
       <module name="microservices" options="-parameters" />
     </option>
   </component>

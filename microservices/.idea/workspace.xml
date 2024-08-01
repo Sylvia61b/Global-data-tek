@@ -4,50 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2fca0600-c71b-46e6-af8f-4a28bac6af7d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Assignment1/MicroservicesApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Autowired/src/main/java/org/example/Address.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Autowired/src/main/java/org/example/ApplicationConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Autowired/src/main/java/org/example/Employee.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MileStone/MileStone.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Springproject/Springproject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Springproject/src/beans.XML" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Rating/src/main/java/com/example/CourseRatingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Rating/src/main/java/com/example/entity/CourseRating.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Course-Rating/src/main/java/com/example/repository/CourseRatingRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/src/main/java/com/example/controller/CourseCatalogController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/src/main/java/com/example/dto/CourseDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/src/main/java/com/example/dto/CourseRatingDTO.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/src/main/java/com/example/service/CourseCatalogService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CourseCatalog/src/test/java/com/example/MicroservicesApplicationTests.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EnrolledCourse/src/main/java/com/example/controller/EnrolledCourseController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EnrolledCourse/src/main/java/com/example/entity/EnrolledCourse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/EnrolledCourse/src/main/java/com/example/repository/EnrolledCourseRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/main/java/com/springboot/MybootApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/main/java/com/springboot/controller/UserController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/main/java/com/springboot/model/Login.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/main/java/com/springboot/model/User.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/main/java/com/springboot/repository/UserRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/main/java/com/springboot/repository/UserRepositoryImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/main/java/com/springboot/service/UserService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/main/java/com/springboot/service/UserServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../myboot/src/test/java/com/springboot/MybootApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+    <list default="true" id="2fca0600-c71b-46e6-af8f-4a28bac6af7d" name="Changes" comment="microservices with jpa">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/EnrolledCourse/src/main/java/com/example/repository/EnrolledCourseRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/EnrolledCourse/src/main/java/com/example/repository/EnrolledCourseRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,26 +34,26 @@
       </MavenGeneralSettings>
     </option>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2k1ccXzCbdNDlL0RenJCB4IyrMc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.CourseCatalogApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Global-data-tek/microservices",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.CourseCatalogApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Global-data-tek/microservices&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Global-data-tek\microservices\EnrolledCourse\src\main\java\com\example\entity" />
@@ -126,6 +88,27 @@
       <option name="presentableId" value="Default" />
       <updated>1722454602247</updated>
     </task>
+    <task id="LOCAL-00001" summary="microservices with jpa">
+      <option name="closed" value="true" />
+      <created>1722478670986</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722478670987</updated>
+    </task>
+    <task id="LOCAL-00002" summary="microservices with jpa">
+      <option name="closed" value="true" />
+      <created>1722478685177</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1722478685177</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="microservices with jpa" />
+    <option name="LAST_COMMIT_MESSAGE" value="microservices with jpa" />
   </component>
 </project>
