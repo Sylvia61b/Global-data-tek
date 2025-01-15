@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="org.example.Employee" table="employee">
+        <id name="employeeId" column="eid">
+            <generator class="increment"></generator>
+        </id>
+        <property name="name" column="ename"></property>
+        <property name="salary" column="esalary"></property>
+        <property name="department" column="edepartment"/>
+        <property name="designation" column="edesignation"/>
+
+    </class>
+</hibernate-mapping>

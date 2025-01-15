@@ -1,0 +1,54 @@
+services:
+  eureka-service:
+    build:
+      context: ./eureka-service # Path to the service folder containing the Dockerfile
+      dockerfile: Dockerfile
+    ports:
+      - "8761:8761"
+    networks:
+      - app-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - JAVA_OPTS=-Xmx512m
+
+#  user-service:
+#    build:
+#      context: ./user-service
+#      dockerfile: Dockerfile
+#    container_name: user-service-container
+#    ports:
+#      - "8081:8081"
+#    networks:
+#      - app-network
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=default
+#      - JAVA_OPTS=-Xmx512m
+#
+#  cart-service:
+#    build:
+#      context: ./cart-service
+#      dockerfile: Dockerfile
+#    container_name: cart-service-container
+#    ports:
+#      - "8082:8082"
+#    networks:
+#      - app-network
+#    environment:
+#      - SPRING_PROFILES_ACTIVE=default
+#      - JAVA_OPTS=-Xmx512m
+
+  cloud-gateway:
+    build:
+      context: ./cloud-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "8989:8989"
+    networks:
+      - app-network
+    environment:
+      - SPRING_PROFILES_ACTIVE=default
+      - JAVA_OPTS=-Xmx512m
+
+networks:
+  app-network:
+    driver: bridge

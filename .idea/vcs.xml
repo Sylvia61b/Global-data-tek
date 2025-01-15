@@ -2,5 +2,11 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/React/CentilionZ/front_end" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/React/CentilionZ/front_end/node_modules/centillionz" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/React/CentilionZ/react-project" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/React/CentilionZ/shift_service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/React/CentilionZ/user_service" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ShopForHome/project" vcs="Git" />
   </component>
 </project>
