@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: cloud-gateway  # Name of the gateway application
+
+  cloud:
+    discovery:
+      enabled: true  # Enable service discovery (e.g., Eureka)
+    config:
+      enabled: false
+    eureka:
+      client:
+        service-url:
+          defaultZone: http://eureka-service:8761/eureka/
+          #http://localhost:8761/eureka/  # Eureka server URL
+
+    gateway:
+      routes:
+        - id: cart-service
+          uri: lb://cart-service  # 'lb' stands for load-balanced service, using Eureka for service discovery
+          predicates:
+            - Path=/carts/**  # Path to match for this route
+
+
+        - id: user-service
+          uri: lb://user-service  # Load-balanced URI for user service
+          predicates:
+            - Path=/users/**  # Path to match for this route
+
+server:
+  port: 8989
